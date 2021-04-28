@@ -29,7 +29,7 @@ function draw(){
         idenitify.detect(video,gotResults);
         
         for(i=0;i<objects.length;i++){
-            
+            document.getElementById("obj_detected").innerHTML = "Object Detected";
            
             fill(r,g,b);
             percent = floor(objects[i].confidence * 100);
