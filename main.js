@@ -27,9 +27,10 @@ function draw(){
         b = floor(random(255));
         console.log(r,g,b);
         idenitify.detect(video,gotResults);
+        
         for(i=0;i<objects.length;i++){
             
-            document.getElementById("no_of_objects").innerHTML = "There are: " + objects.length + " " + "Objects detected by cocossd";
+           
             fill(r,g,b);
             percent = floor(objects[i].confidence * 100);
             text(objects[i].label + " " +  percent + "%", objects[i].x+10 , objects[i].y+15);
@@ -37,12 +38,25 @@ function draw(){
             stroke(r,g,b);
             
             rect(objects[i].x,objects[i].y,objects[i].width,objects[i].height);
-            
+            if(objects[i].label = "person"){
+                document.getElementById("status").innerHTML = "Status: Baby Found";
+                sound.stop();
+            }else{
+                document.getElementById("status").innerHTML = "ALERT: BABY NOT FOUND!!!";
+                sound.play();
+            }
+        }
+        if(objects.length == 0){
+            document.getElementById("status").innerHTML = "ALERT: BABY NOT FOUND!!!";
+            sound.play();
         }
         
         
     }
+   
 }
+
+
 
 function modelLoaded(){
     console.log("MOdel loaded");
